@@ -1,0 +1,33 @@
+import _heapq
+class EmergencyQueue:
+    def __init__ (self):
+        self.queue = []
+
+    def add_patient(self, name, priority):
+        _heapq.heappush(self.queue, (priority, name))
+
+    def process_patient(self):
+        if not self.is_empty():
+            return _heapq.heappop(self.queue)[1]
+        
+        else:
+            return "Antrian kosong!"
+        
+    def display_queue(self):
+        sorted_queue = sorted(self.queue)
+        print([patient [1] for patient in sorted_queue])
+
+    def is_empty(self):
+            return len(self.queue) == 0
+
+if __name__ == "__main__":
+     queue = EmergencyQueue()
+     queue.add_patient("Andi", 2)   #Serius
+     queue.add_patient("Budi", 1)   #Kritis
+     queue.add_patient("Citra", 3)  #Ringan
+     queue.add_patient("Dewi", 1)   #Kritis
+     
+     print("Antrian saat ini:")
+     print("Pasien diproses:", queue.process_patient())
+     print("Antrian setelah pemrosesan:")
+     queue.display_queue()
