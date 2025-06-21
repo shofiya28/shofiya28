@@ -1,0 +1,37 @@
+from collections import deque
+
+class TaskManager:
+    def __init__(self):
+        self.tasks = deque()
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def remove_task(self):
+        if not self.is_empty():
+            return self.tasks.popleft()
+        else:
+            return "Tidak ada tugas dalam antrian!"
+
+    def add_urgent_task(self, task):
+        self.tasks.appendleft(task)  
+
+    def display_tasks(self):
+        print(list(self.tasks))  
+
+    def is_empty(self):
+        return len(self.tasks) == 0
+
+if __name__ == "__main__":
+    task = TaskManager()
+    task.add_task("Kerjakan laporan")
+    task.add_task("Meeting dengan tim")
+    task.add_urgent_task("Bug fix urgent")
+
+    print("Daftar Tugas:")
+    task.display_tasks()
+
+    print("Tugas dikerjakan:", task.remove_task())
+
+    print("Daftar Tugas setelah pemrosesan:")
+    task.display_tasks()
